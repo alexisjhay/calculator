@@ -23,8 +23,8 @@ body{
     max-height: 600px;
 }
 
-.screen{
-    height: 100px;
+.top-res, .bottom-res{
+    height: 50px;
     background-color: rgb(189, 189, 189);
     display: flex;
     justify-content: flex-end;
