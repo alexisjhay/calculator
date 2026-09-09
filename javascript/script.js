@@ -22,7 +22,7 @@ let result = document.querySelector(".bottom-res");
 result.textContent = "0";
 let topResult = document.querySelector(".top-res")
 
-let currentNum = result.textContent;
+let currentNum = null;
 let previousNum = null;
 let operator;
 let justCalculated = false;
@@ -73,6 +73,9 @@ function operatorPress(){
 
 
         }else{
+
+            if(!currentNum) return
+            
             previousNum = operate(previousNum, currentNum, operator)
 
             operator = operatorBtns.textContent
@@ -125,6 +128,22 @@ function clearBtn(){
     })
 }
 
+const deleteNum = document.querySelector(".delete")
+
+function deleteBtn(){
+    deleteNum.addEventListener("click", ()=>{
+    
+        (result.textContent.length === 1) ? result.textContent = "0" :  result.textContent = result.textContent.slice(0, -1);
+
+        (!currentNum) ? currentNum = null : currentNum = currentNum.slice(0, -1);
+
+        if(justCalculated){
+            clearNumber();
+        }
+    })
+    
+}
+
 
 function clearNumber(){
     currentNum = null;
@@ -137,8 +156,7 @@ function clearNumber(){
 
 const equals = document.querySelector(".equalTo")
 function equalBtn(){
-    equals.addEventListener("click", ()=> {
-
+    equals.addEventListener("click", (e)=> {
         if(previousNum === null || currentNum === null){
             return
         }
@@ -155,4 +173,4 @@ operatorPress();
 clearBtn();
 equalBtn();
 decimalBtn();
-
+deleteBtn();
