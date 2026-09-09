@@ -1,20 +1,25 @@
 function operate(previousNum, currentNum, operator){
     switch(operator){
         case "+":
+
             result.textContent = +previousNum + +currentNum    
             return +previousNum + +currentNum      
         
         case "-":
+
             result.textContent = +previousNum - +currentNum    
             return +previousNum - +currentNum       
 
         case "*":
+
             result.textContent = +previousNum * +currentNum    
             return +previousNum * +currentNum  
            
         case "/":
+             
             result.textContent = +previousNum / +currentNum    
-            return +previousNum / +currentNum 
+            return +previousNum / +currentNum
+            
     }
 }
 const body = document.querySelector("body");
@@ -116,6 +121,7 @@ function handleOperator(operators){
 
         currentNum = null
 
+
         justCalculated = true
 
         topResult.textContent = `${previousNum} ${operator}`
@@ -210,19 +216,31 @@ function clearNumber(){
 
 const equals = document.querySelector(".equalTo")
 function equalBtn(){
-    equals.addEventListener("click", (e)=> {
+    equals.addEventListener("click", ()=> {
         calculateResult();
     })
 }
 
 function calculateResult(){
+
     if(previousNum === null || currentNum === null){
+        return
+    }
+
+    if(operator === "/"){
+        if(currentNum == 0){
+            currentNum = null;
+            alert("not allowed")
             return
-        }
+           }
+    }
+
         justCalculated = true
+
         result.textContent = operate(previousNum, currentNum, operator)
 
         topResult.textContent = `${previousNum} ${operator} ${currentNum} =`
+        
 }
 
 
