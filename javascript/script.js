@@ -8,16 +8,16 @@ function operate(previousNum, currentNum, operator){
             result.textContent = +previousNum - +currentNum    
             return +previousNum - +currentNum       
 
-        case "x":
+        case "*":
             result.textContent = +previousNum * +currentNum    
             return +previousNum * +currentNum  
            
-        case "÷":
+        case "/":
             result.textContent = +previousNum / +currentNum    
             return +previousNum / +currentNum 
     }
 }
-
+const body = document.querySelector("body");
 let result = document.querySelector(".bottom-res");
 result.textContent = "0";
 let topResult = document.querySelector(".top-res")
@@ -27,8 +27,6 @@ let previousNum = null;
 let operator;
 let justCalculated = false;
 
-const adds = document.querySelector(".add");
-
 function newInputNumber(){
     const numberBtns = document.querySelector(".btn-container")
     numberBtns.addEventListener("click", (e) => {
@@ -36,20 +34,66 @@ function newInputNumber(){
 
         if(!buttons) return
 
-        displayScreen(buttons)
+        displayScreen(buttons.textContent)
 
-            if(currentNum === null){
-                currentNum = buttons.textContent
-            }else{
-                currentNum += buttons.textContent
-            }
-
-            if(justCalculated){
-                result.textContent = currentNum;
-                justCalculated = false
-            }
+        numInput(buttons.textContent) 
 
     })
+}
+
+function keyboardPress(){
+    
+    body.addEventListener("keydown", (e)=> {
+        if(!isNaN(e.key) || e.key === "."){
+
+            displayScreen(e.key)
+        
+            numInput(e.key)
+
+        }
+
+        if(['+', '-', '*', '/'].includes(e.key)){
+
+            handleOperator(e.key)
+
+        }
+    
+
+        if(e.key === "Enter" || e.key === "="){
+
+            e.preventDefault();
+
+            calculateResult();
+
+        }
+
+        if(e.key === "Backspace"){
+
+            backspace();
+
+        }
+
+        if(e.key === "Escape" || e.key.toLowerCase() === "c"){
+
+            clearNumber();
+
+        }
+    })
+}
+
+function numInput(num){
+
+    if(currentNum === null){
+        currentNum = num
+    }else{
+        currentNum += num
+    }
+
+    if(justCalculated){
+        result.textContent = currentNum;
+        justCalculated = false
+    }
+
 }
 
 function operatorPress(){
@@ -59,46 +103,51 @@ function operatorPress(){
 
         if(!operatorBtns) return
 
-        if(previousNum === null){
-
-            currentToPrev();
-
-            operator = operatorBtns.textContent
-
-            currentNum = null
-
-            justCalculated = true
-
-            topResult.textContent = `${previousNum} ${operator}`
-
-
-        }else{
-
-            if(!currentNum) return
-            
-            previousNum = operate(previousNum, currentNum, operator)
-
-            operator = operatorBtns.textContent
-
-            currentNum = null
-
-            justCalculated = true
-
-            topResult.textContent = `${previousNum} ${operator}`
-          
-        }
+        handleOperator(operatorBtns.textContent);
     })
 }
 
-function displayScreen(btn){
+function handleOperator(operators){
+    if(previousNum === null){
+
+        currentToPrev();
+
+        operator = operators
+
+        currentNum = null
+
+        justCalculated = true
+
+        topResult.textContent = `${previousNum} ${operator}`
+
+
+    }else{
+
+        if(!currentNum) return
+        
+        previousNum = operate(previousNum, currentNum, operator)
+
+        operator = operators
+
+        currentNum = null
+
+        justCalculated = true
+
+        topResult.textContent = `${previousNum} ${operator}`
+          
+    }
+}
+
+
+function displayScreen(num){
     if(result.textContent === "0"){
-        if(btn.textContent === "."){
+        if(num === "."){
             result.textContent += "."
         }else{
-            result.textContent = btn.textContent
+            result.textContent = num
         }
     }else{
-        result.textContent += btn.textContent
+        result.textContent += num
     }
 }
 
@@ -133,15 +182,20 @@ const deleteNum = document.querySelector(".delete")
 function deleteBtn(){
     deleteNum.addEventListener("click", ()=>{
     
-        (result.textContent.length === 1) ? result.textContent = "0" :  result.textContent = result.textContent.slice(0, -1);
+        backspace();
+
+    })
+    
+}
+
+function backspace(){
+    (result.textContent.length === 1) ? result.textContent = "0" :  result.textContent = result.textContent.slice(0, -1);
 
         (!currentNum) ? currentNum = null : currentNum = currentNum.slice(0, -1);
 
         if(justCalculated){
             clearNumber();
         }
-    })
-    
 }
 
 
@@ -157,18 +211,23 @@ function clearNumber(){
 const equals = document.querySelector(".equalTo")
 function equalBtn(){
     equals.addEventListener("click", (e)=> {
-        if(previousNum === null || currentNum === null){
+        calculateResult();
+    })
+}
+
+function calculateResult(){
+    if(previousNum === null || currentNum === null){
             return
         }
         justCalculated = true
         result.textContent = operate(previousNum, currentNum, operator)
 
         topResult.textContent = `${previousNum} ${operator} ${currentNum} =`
-    })
 }
 
 
 newInputNumber();
+keyboardPress();
 operatorPress();
 clearBtn();
 equalBtn();
