@@ -242,7 +242,7 @@ function calculateResult(){
     if(operator === "/"){
         if(currentNum == 0){
             currentNum = null;
-            alert("not allowed")
+            alert("Diving by 0 is not allowed")
             return
            }
     }
