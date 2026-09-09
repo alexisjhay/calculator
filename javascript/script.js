@@ -3,26 +3,26 @@ function operate(previousNum, currentNum, operator){
         case "+":
             let addResult = +previousNum + +currentNum
 
-            result.textContent = addResult
+            result.textContent = parseFloat(addResult.toFixed(3))
             return addResult    
         
         case "-":
 
             let subtractResult = +previousNum - +currentNum
-            result.textContent = subtractResult
+            result.textContent = parseFloat(subtractResult.toFixed(3))
 
             return subtractResult      
 
         case "*":
 
             let multiplyResult = +previousNum * +currentNum
-            result.textContent =  multiplyResult
+            result.textContent =  parseFloat(multiplyResult.toFixed(3))
 
             return multiplyResult
            
         case "/":
             let divisionResult = +previousNum / +currentNum
-            result.textContent = divisionResult.toFixed(3)
+            result.textContent = parseFloat(divisionResult.toFixed(3))
 
             return divisionResult;
             
@@ -142,7 +142,7 @@ function handleOperator(operators){
 
         if(!currentNum) return
         
-        previousNum = operate(previousNum, currentNum, operator).toFixed(3)
+        previousNum = parseFloat(operate(previousNum, currentNum, operator).toFixed(3))
 
         operator = operators
 
@@ -254,7 +254,7 @@ function calculateResult(){
 
         justCalculated = true
 
-        result.textContent = operate(previousNum, currentNum, operator).toFixed(3)
+        result.textContent = parseFloat(operate(previousNum, currentNum, operator).toFixed(3))
 
         topResult.textContent = `${previousNum} ${operator} ${currentNum} =`
         
