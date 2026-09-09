@@ -29,6 +29,7 @@ body{
     max-height: 700px;
     box-shadow: 10px 10px 0 0 rgb(82, 81, 81);
     border: 5px solid rgb(116, 115, 115);
+    width: 100%;
 }
 
 .footer, .header{
@@ -69,6 +70,8 @@ span svg:hover{
 
 .screen{
     border-radius: 8px;
+    flex-wrap: wrap;
+    width: 100%;
     overflow: hidden;
 }
 
@@ -78,11 +81,13 @@ span svg:hover{
     justify-content: flex-end;
     align-items: flex-end;
     padding: 8px 16px;
+    flex-wrap: wrap;
+    width: 100%;
+
 }
 
 .bottom-res{
     font-size: 56px;
-    height: 100px;
 }
 
 .top-res{

@@ -1,24 +1,30 @@
 function operate(previousNum, currentNum, operator){
     switch(operator){
         case "+":
+            let addResult = +previousNum + +currentNum
 
-            result.textContent = +previousNum + +currentNum    
-            return +previousNum + +currentNum      
+            result.textContent = addResult
+            return addResult    
         
         case "-":
 
-            result.textContent = +previousNum - +currentNum    
-            return +previousNum - +currentNum       
+            let subtractResult = +previousNum - +currentNum
+            result.textContent = subtractResult
+
+            return subtractResult      
 
         case "*":
 
-            result.textContent = +previousNum * +currentNum    
-            return +previousNum * +currentNum  
+            let multiplyResult = +previousNum * +currentNum
+            result.textContent =  multiplyResult
+
+            return multiplyResult
            
         case "/":
-             
-            result.textContent = +previousNum / +currentNum    
-            return +previousNum / +currentNum
+            let divisionResult = +previousNum / +currentNum
+            result.textContent = divisionResult.toFixed(3)
+
+            return divisionResult;
             
     }
 }
@@ -136,7 +142,7 @@ function handleOperator(operators){
 
         if(!currentNum) return
         
-        previousNum = operate(previousNum, currentNum, operator)
+        previousNum = operate(previousNum, currentNum, operator).toFixed(3)
 
         operator = operators
 
@@ -248,7 +254,7 @@ function calculateResult(){
 
         justCalculated = true
 
-        result.textContent = operate(previousNum, currentNum, operator)
+        result.textContent = operate(previousNum, currentNum, operator).toFixed(3)
 
         topResult.textContent = `${previousNum} ${operator} ${currentNum} =`
         
