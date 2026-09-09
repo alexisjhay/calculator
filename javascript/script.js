@@ -49,11 +49,17 @@ function newInputNumber(){
 function keyboardPress(){
     
     body.addEventListener("keydown", (e)=> {
-        if(!isNaN(e.key) || e.key === "."){
+        if(!isNaN(e.key)){
 
             displayScreen(e.key)
         
             numInput(e.key)
+
+        }
+
+        if(e.key === "."){
+
+            checkDecimal(e.key)
 
         }
 
@@ -165,14 +171,20 @@ function decimalBtn(){
     const decimal = document.querySelector(".decimal");
 
     decimal.addEventListener("click", (e)=>{
-        if(result.textContent.includes(".")){
-            e.preventDefault
-        }else{
-            result.textContent += e.target.textContent
-            currentNum += e.target.textContent
-        }      
+        checkDecimal(e.target.textContent)    
     })
     
+}
+
+function checkDecimal(num){
+
+    if(result.textContent.includes(".")){
+        return
+    }else{
+        result.textContent += num
+        currentNum += num
+    }
+
 }
 
 const clears = document.querySelector(".clear")
