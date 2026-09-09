@@ -127,7 +127,6 @@ function handleOperator(operators){
 
         currentNum = null
 
-
         justCalculated = true
 
         topResult.textContent = `${previousNum} ${operator}`
@@ -242,7 +241,7 @@ function calculateResult(){
     if(operator === "/"){
         if(currentNum == 0){
             currentNum = null;
-            alert("Diving by 0 is not allowed")
+            alert("Dividing by 0 is not allowed")
             return
            }
     }

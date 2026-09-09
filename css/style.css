@@ -1,36 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
 }
 
 body{
     display: flex;
     flex-direction: column;
     min-height: 100dvh;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    background-color: rgb(167, 191, 221);
+    padding: 32px;
 }
 
 .container{
+    border-radius: 30px;
     flex: 1;
-    background-color: papayawhip;
+    background-color: rgb(29, 29, 29);
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding: 16px;
+    gap: 32px;
+    padding: 32px;
     min-width: 500px;
-    max-height: 600px;
+    max-width: 500px;
+    max-height: 700px;
+    box-shadow: 10px 10px 0 0 rgb(82, 81, 81);
+    border: 5px solid rgb(116, 115, 115);
+}
+
+.footer, .header{
+    height: 40px;
+    display: flex;
+    color: rgb(48, 48, 48);
+    align-items: center;
+    justify-content: center;
+
+}
+
+.header{
+    font-size: 45px;
+    font-weight: 800;
+}
+
+.footer{
+    font-size: 20px;
+}
+
+span{
+    
+    margin-left: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+svg{
+    width: 25px;
+    height: auto;
+    color: black;
+    transition: .7s ease;
+}
+
+span svg:hover{
+    transform: rotate(360deg);
+}
+
+.screen{
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .top-res, .bottom-res{
-    height: 50px;
     background-color: rgb(189, 189, 189);
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    font-size: 42px;
-    padding: 0 16px;
+    padding: 8px 16px;
+}
+
+.bottom-res{
+    font-size: 56px;
+    height: 100px;
+}
+
+.top-res{
+    font-size: 30px;
+    color: rgb(70, 70, 70);
+    height: 60px;
 }
 
 .btn-container{
@@ -48,4 +106,32 @@ body{
 
 .btn-row button{
     flex: 1;
+    border-radius: 30px;
+    border: none;
+    font: inherit;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .1s ease;
+}
+
+.operator-btn, .equalTo{
+    background-color: dodgerblue;
+    color: white;
+
+    transition: .1s ease;
+}
+
+.operator-btn:hover, .equalTo:hover{
+    background-color: rgb(255, 255, 255);
+    color: dodgerblue;
+    font-weight: 700;
+    cursor: pointer;
+    scale: 1.1;
+}
+
+.btn-row button:hover{
+    scale: 1.1;
+    cursor: pointer;
 }
